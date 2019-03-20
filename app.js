@@ -14,17 +14,17 @@
  */
 
 'use strict';
-
+const path = require('path');
 // [START gae_node_request_example]
 const express = require('express');
 
 const app = express();
-
+app.use(express.static('build'))
 app.get('/', (req, res) => {
   res
     .status(200)
-    .send('Hello, world!')
-    .end();
+    .header("Content-Type", "text/html")
+    .sendFile(path.join(__dirname, "/build/index.html"));
 });
 
 // Start the server
